@@ -5,26 +5,21 @@ import { HiArrowSmallRight } from "react-icons/hi2";
 import { AiOutlineFire } from "react-icons/ai";
 import { GoSearch } from "react-icons/go";
 import { FaRegUserCircle } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { logout } from "../slices/userSlice";
 
 const Header = () => {
-  const [selectedOption, setSelectedOption] = useState("");
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleChange = (event) => {
-    const value = event.target.value;
-    setSelectedOption(value);
+  const storedUser = JSON.parse(localStorage.getItem("userInfo")) || {};
+  const { name = "", isLoggedIn = false } = storedUser;
 
-    if (value === "profile") {
-      navigate("/profile");
-    } else if (value === "logout") {
-      console.log("Logging out...");
-      // Handle logout logic here
-    }
-  };
-  const loggedIn = true;
   function handleLogout() {
+    dispatch(logout());
     navigate("/login");
   }
+
   return (
     <header className="bg-white shadow-md">
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
@@ -51,10 +46,10 @@ const Header = () => {
             <AiOutlineFire /> Today's Deals
           </NavLink> */}
           <div className="relative">
-            {loggedIn ? (
+            {isLoggedIn ? (
               <div className="flex items-center space-x-4">
                 <FaRegUserCircle className="text-gray-700 text-2xl" />
-                <span className="text-gray-950 font-medium">John Doe</span>
+                <span className="text-gray-950 font-medium">{name}</span>
                 <button
                   className="bg-red-600 text-white ml-4 px-3 py-1 rounded-lg hover:bg-red-700 transition"
                   onClick={handleLogout}
@@ -64,10 +59,10 @@ const Header = () => {
               </div>
             ) : (
               <NavLink
-                to="/signup"
+                to="/login"
                 className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
               >
-                Sign Up
+                Login
               </NavLink>
             )}
           </div>
