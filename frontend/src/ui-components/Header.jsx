@@ -23,7 +23,7 @@ const Header = () => {
   };
   const loggedIn = true;
   function handleLogout() {
-    console.log("first");
+    navigate("/login");
   }
   return (
     <header className="bg-white shadow-md">
@@ -57,7 +57,7 @@ const Header = () => {
                 <span className="text-gray-950 font-medium">John Doe</span>
                 <button
                   className="bg-red-600 text-white ml-4 px-3 py-1 rounded-lg hover:bg-red-700 transition"
-                  onClick={() => console.log("Logout")}
+                  onClick={handleLogout}
                 >
                   Logout
                 </button>
