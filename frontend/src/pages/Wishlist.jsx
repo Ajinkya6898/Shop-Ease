@@ -1,11 +1,14 @@
 import React from "react";
-import ImageSlider from "../ui-components/ImageSlider";
+import Alert from "../ui-components/Alert";
+import Container from "../ui-components/Container";
 
 const Wishlist = () => {
   return (
-    <div>
-      <ImageSlider />
-    </div>
+    <>
+      <Container>
+        <Alert type="info" message="You don't have anything in your wishlist" />
+      </Container>
+    </>
   );
 };
 
