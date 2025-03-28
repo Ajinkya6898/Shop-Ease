@@ -8,7 +8,7 @@ const AppLayout = () => {
     <div className="grid grid-cols-[26rem_1fr] grid-rows-[auto_1fr] h-screen">
       <Header />
       <Sidebar />
-      <main className="bg-gradient-to-br to-blue-50 px-[4.8rem] ">
+      <main className="bg-gradient-to-br to-blue-100 px-[4.8rem] ">
         <Outlet />
       </main>
     </div>
