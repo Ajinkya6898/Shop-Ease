@@ -11,12 +11,12 @@ import {
 
 const StyledNavLink = ({ icon, navLabel, to }) => {
   return (
-    <li className="h-10 transition flex items-center gap-4 hover:bg-grey-100 hover:rounded-md">
+    <li className="h-10 mt-2 transition flex items-center gap-4 hover:bg-grey-100 hover:rounded-md">
       <NavLink
         to={to}
         className={({ isActive }) =>
           `flex items-center gap-6  w-full h-full px-4 rounded-md hover:bg-gray-100 ${
-            isActive ? "bg-gray-100 text-blue-500" : "bg-white"
+            isActive ? "bg-gray-100 text-brand-500" : "bg-white"
           }`
         }
       >

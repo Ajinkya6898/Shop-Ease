@@ -11,13 +11,13 @@ const Contact = () => {
       <PageHeader pageHeading="Contact Us" />
       <p className="text-lg text-center">
         Have questions or need assistance? Our team at{" "}
-        <span className="font-semibold text-blue-500">ShopEase</span> is here to
-        help!
+        <span className="font-semibold text-brand-500">ShopEase</span> is here
+        to help!
       </p>
 
       <div className="grid md:grid-cols-2 gap-6">
         <div className="p-6 rounded-lg shadow-md flex flex-col items-center text-center">
-          <h3 className="text-xl font-semibold text-blue-500">Get in Touch</h3>
+          <h3 className="text-xl font-semibold text-brand-500">Get in Touch</h3>
           <p className="mt-3 text-gray-700 text-sm">
             Reach out via email or phone, and we'll be happy to assist you.
           </p>
@@ -38,7 +38,7 @@ const Contact = () => {
         </div>
 
         <div className="p-6 rounded-lg shadow-md flex flex-col items-center text-center">
-          <h3 className="text-xl font-semibold text-blue-600">Visit Us</h3>
+          <h3 className="text-xl font-semibold text-brand-600">Visit Us</h3>
           <p className="mt-3 text-gray-700 text-sm">
             Come by our office for a face-to-face chat.
           </p>

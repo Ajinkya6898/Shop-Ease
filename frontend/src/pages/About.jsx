@@ -9,7 +9,7 @@ const About = () => {
       <PageHeader pageHeading="About Us" />
       <p className="text-lg text-center text-gray-700 leading-relaxed">
         Welcome to{" "}
-        <span className="font-semibold text-blue-600">ShopEase </span> , your
+        <span className="font-semibold text-brand-600">ShopEase </span> , your
         ultimate online shopping hub! We bring you the best shopping experience
         with a vast selection of products, unbeatable deals, and top-notch
         service.
@@ -17,7 +17,7 @@ const About = () => {
 
       <div className="grid md:grid-cols-2 gap-6">
         <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center text-center">
-          <h3 className="text-xl font-semibold text-blue-600">
+          <h3 className="text-xl font-semibold text-brand-600">
             Why Choose Us?
           </h3>
           <ul className="mt-3 text-sm space-y-2">
@@ -49,7 +49,7 @@ const About = () => {
         </div>
 
         <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center text-center">
-          <h3 className="text-xl font-semibold text-blue-600">Our Mission</h3>
+          <h3 className="text-xl font-semibold text-brand-600">Our Mission</h3>
           <p className="mt-4 text-gray-700 text-sm">
             We strive to revolutionize online shopping by making it{" "}
             <span className="font-semibold">
@@ -94,7 +94,7 @@ const About = () => {
 
       <div className="text-center mt-6">
         <p className="text-gray-700">Need assistance? Reach out to us at</p>
-        <p className="font-semibold text-blue-500">support@shopease.com</p>
+        <p className="font-semibold text-brand-500">support@shopease.com</p>
       </div>
     </Container>
   );
