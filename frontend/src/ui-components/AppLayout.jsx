@@ -1,16 +1,16 @@
 import React from "react";
-import Sidebar from "./Sidebar";
 import { Outlet } from "react-router-dom";
+import Header from "./Header";
+import Sidebar from "./Sidebar";
 
 const AppLayout = () => {
   return (
-    <div className="grid grid-rows-[auto_1fr_auto] flex-col h-screen">
-      <header>this is a header</header>
-      <main className="flex gap-8">
-        <Sidebar />
+    <div className="grid grid-cols-[26rem_1fr] grid-rows-[auto_1fr] h-screen">
+      <Header />
+      <Sidebar />
+      <main className="bg-[#f9fafb] p-[4rem_4.8rem_6.4rem]">
         <Outlet />
       </main>
-      <footer>tis is footer</footer>
     </div>
   );
 };

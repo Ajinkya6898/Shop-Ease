@@ -11,51 +11,64 @@ import {
 
 const StyledNavLink = ({ icon, navLabel, to }) => {
   return (
-    <li className="bg-white h-10 flex items-center gap-4 hover:bg-sky-50 hover:rounded-md">
+    <li className="text-grey-900 h-10 transition flex items-center gap-4 hover:bg-grey-100 hover:rounded-md">
       <NavLink
         to={to}
         className={({ isActive }) =>
-          `flex items-center gap-4 w-full h-full px-4 rounded-md hover:bg-sky-50 ${
-            isActive ? "bg-sky-50" : "bg-white"
+          `flex items-center gap-6 text-gray-900 w-full h-full px-4 rounded-md hover:bg-gray-100 ${
+            isActive ? "bg-gray-100 text-blue-600" : "bg-white"
           }`
         }
       >
-        <span className="font-medium">{icon}</span>
-        <p className="font-medium">{navLabel}</p>
+        {({ isActive }) => (
+          <>
+            <span
+              className={`text-2xl ${
+                isActive ? "text-brand-600" : "text-gray-900"
+              }`}
+            >
+              {icon}
+            </span>
+            <p className="font-medium">{navLabel}</p>
+          </>
+        )}
       </NavLink>
     </li>
   );
 };
+
 const Sidebar = () => {
   return (
-    <ul className="w-54 mt-4 py-2 shadow-md rounded-md h-fit">
-      <StyledNavLink icon={<HiOutlineHome />} navLabel="Home" to="/" />
-      <StyledNavLink
-        icon={<HiOutlineRectangleGroup />}
-        navLabel="Products"
-        to="/products"
-      />
-      <StyledNavLink
-        icon={<HiOutlineHeart />}
-        navLabel="Wishlist"
-        to="/wishlist"
-      />
-      <StyledNavLink
-        icon={<HiOutlineShoppingCart />}
-        navLabel="Cart"
-        to="/cart"
-      />
-      <StyledNavLink
-        icon={<HiOutlinePaperAirplane />}
-        navLabel="Contact"
-        to="/contact"
-      />
-      <StyledNavLink
-        icon={<HiOutlineInformationCircle />}
-        navLabel="About"
-        to="/about"
-      />
-    </ul>
+    <aside className="bg-white p-[3.2rem_2.4rem]  border-r-2 border-[#f3f4f6] row-span-full">
+      <ul className="">
+        <StyledNavLink icon={<HiOutlineHome />} navLabel="Home" to="/" />
+        <StyledNavLink
+          icon={<HiOutlineRectangleGroup />}
+          navLabel="Products"
+          to="/products"
+        />
+        <StyledNavLink
+          icon={<HiOutlineHeart />}
+          navLabel="Wishlist"
+          to="/wishlist"
+        />
+        <StyledNavLink
+          icon={<HiOutlineShoppingCart />}
+          navLabel="Cart"
+          to="/cart"
+        />
+        <StyledNavLink
+          icon={<HiOutlinePaperAirplane />}
+          navLabel="Contact"
+          to="/contact"
+        />
+        <StyledNavLink
+          icon={<HiOutlineInformationCircle />}
+          navLabel="About"
+          to="/about"
+        />
+      </ul>
+    </aside>
   );
 };
 
