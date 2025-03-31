@@ -7,17 +7,25 @@ import { GoSearch } from "react-icons/go";
 import { FaRegUserCircle } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { logout } from "../slices/userSlice";
+import { useModal } from "../ui-components/ModalProvider";
 
 const Header = () => {
   const dispatch = useDispatch();
+  const { modalDispatch } = useModal();
   const navigate = useNavigate();
 
   const storedUser = JSON.parse(localStorage.getItem("userInfo")) || {};
   const { name = "", isLoggedIn = false } = storedUser;
 
   function handleLogout() {
-    dispatch(logout());
-    navigate("/login");
+    modalDispatch({
+      type: "warning",
+      message: "Do you want to logout?",
+      onConfirm: () => {
+        dispatch(logout());
+        navigate("/login");
+      },
+    });
   }
 
   return (

@@ -1,46 +1,44 @@
 import { createContext, useContext, useState } from "react";
-import {
-  FaTimes,
-  FaCheckCircle,
-  FaExclamationTriangle,
-  FaTimesCircle,
-} from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
 
 const ModalContext = createContext();
 
-export function ModalProvider({ children, onModalClose, onConfirm, onCancel }) {
+export function ModalProvider({ children }) {
   const [modal, setModal] = useState({ isOpen: false, type: "", message: "" });
 
-  const dispatch = ({ type, message }) => {
-    setModal({ isOpen: true, type, message });
-  };
-
   const closeModal = () => {
-    setModal({ isOpen: false, type: "", message: "" });
+    setModal({
+      isOpen: false,
+      type: "",
+      message: "",
+      onConfirm: null,
+      onCancel: null,
+    });
   };
 
-  const typeStyles = {
-    success: {
-      icon: <FaCheckCircle className="text-green-500 text-4xl" />,
-      bg: "bg-green-600",
-    },
-    error: {
-      icon: <FaTimesCircle className="text-red-500 text-4xl" />,
-      bg: "bg-red-600",
-    },
-    warning: {
-      icon: <FaExclamationTriangle className="text-yellow-500 text-4xl" />,
-      bg: "bg-yellow-600",
-    },
+  const modalDispatch = ({ type, message, onConfirm, onCancel }) => {
+    setModal({
+      isOpen: true,
+      type,
+      message,
+      onConfirm: () => {
+        if (onConfirm) onConfirm();
+        closeModal();
+      },
+      onCancel: () => {
+        if (onCancel) onCancel();
+        closeModal();
+      },
+    });
   };
 
   return (
-    <ModalContext.Provider value={{ dispatch }}>
+    <ModalContext.Provider value={{ modalDispatch }}>
       {children}
 
       {modal.isOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 z-50">
-          <div className="bg-white text-gray-950 p-6 rounded-2xl shadow-xl max-w-md w-full transform transition-all scale-95 relative">
+        <div className="fixed inset-0 flex items-center justify-center bg-opacity-70 z-50">
+          <div className="bg-white text-gray-950 p-6 rounded-2xl shadow-2xl border border-gray-300 max-w-lg w-full transform transition-all scale-105 opacity-100">
             <div className="text-2xl font-bold pb-4 border-b flex justify-between items-center">
               <span
                 className={`${
@@ -66,23 +64,21 @@ export function ModalProvider({ children, onModalClose, onConfirm, onCancel }) {
               </button>
             </div>
 
-            {/* Message */}
             <div className="my-8 text-center">
               <h2 className="text-lg font-medium">{modal.message}</h2>
             </div>
 
-            {/* Footer Buttons */}
             <div className="flex justify-end mt-12">
               {modal.type === "warning" ? (
                 <>
                   <button
-                    onClick={onCancel || closeModal}
+                    onClick={modal.onCancel}
                     className="px-4 py-2 mr-4 text-gray-600 bg-gray-200 rounded-lg font-semibold hover:bg-gray-300 transition"
                   >
                     Cancel
                   </button>
                   <button
-                    onClick={onConfirm || closeModal}
+                    onClick={modal.onConfirm}
                     className="px-4 py-2 text-white bg-brand-500 rounded-lg font-semibold hover:bg-brand-600 transition"
                   >
                     Continue
@@ -90,7 +86,7 @@ export function ModalProvider({ children, onModalClose, onConfirm, onCancel }) {
                 </>
               ) : (
                 <button
-                  onClick={onConfirm || closeModal}
+                  onClick={modal.onConfirm}
                   className="px-4 py-2 text-white bg-brand-500 rounded-lg font-semibold hover:bg-brand-600 transition"
                 >
                   OK

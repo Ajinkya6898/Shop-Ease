@@ -27,21 +27,21 @@ const Cart = () => {
         </div>
       ) : (
         <>
-          <div className="max-w-8xl mx-auto p-6">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className="lg:col-span-2 bg-white rounded-2xl shadow-lg p-6">
+          <div className="max-w-7xl mx-auto p-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="lg:col-span-2 space-y-6">
                 {cartProducts.map((item) => (
                   <div
                     key={item.id}
-                    className="flex items-center justify-between border-b py-4"
+                    className="flex items-center bg-white p-5 rounded-2xl shadow-lg"
                   >
                     <img
                       src={item.image}
                       alt={item.title}
-                      className="w-20 h-20 object-cover rounded-lg"
+                      className="w-24 h-24 object-cover rounded-lg"
                     />
 
-                    <div className="flex-1 ml-4">
+                    <div className="flex-1 ml-5">
                       <h3 className="text-lg font-semibold">{item.title}</h3>
                       <p className="text-gray-500">₹ {item.price.toFixed(2)}</p>
                     </div>
@@ -51,25 +51,28 @@ const Cart = () => {
                         onClick={() =>
                           updateQuantity(item.id, item.quantity - 1)
                         }
-                        className="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded-md"
+                        className="w-9 h-9 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center text-lg font-bold"
                       >
                         −
                       </button>
-                      <span className="mx-3 font-medium">{item.quantity}</span>
+                      <span className="mx-4 font-semibold text-lg">
+                        {item.quantity}
+                      </span>
                       <button
                         onClick={() =>
                           updateQuantity(item.id, item.quantity + 1)
                         }
-                        className="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded-md"
+                        className="w-9 h-9 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center text-lg font-bold"
                       >
                         +
                       </button>
                     </div>
+
                     <button
                       onClick={() => removeItem(item.id)}
-                      className="ml-4 text-red-500 hover:text-red-700"
+                      className="ml-5 text-red-500 hover:text-red-700"
                     >
-                      <FaTrash size={18} />
+                      <FaTrash size={20} />
                     </button>
                   </div>
                 ))}
