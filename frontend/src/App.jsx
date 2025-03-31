@@ -10,6 +10,7 @@ import Cart from "./pages/Cart";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
 import Orders from "./pages/Orders";
+import ProfilePage from "./pages/Myprofile";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
       { path: "/cart", element: <Cart /> },
       { path: "/contact", element: <Contact /> },
       { path: "/about", element: <About /> },
+      { path: "/myprofile", element: <ProfilePage /> },
     ],
   },
   { path: "/login", element: <Login /> },

@@ -9,6 +9,7 @@ import {
 } from "react-icons/hi2";
 import { HiOutlineClipboardList } from "react-icons/hi";
 import { FiBox } from "react-icons/fi";
+import { CgProfile } from "react-icons/cg";
 
 const StyledNavLink = ({ icon, navLabel, to }) => {
   return (
@@ -68,6 +69,11 @@ const Sidebar = () => {
           icon={<HiOutlineInformationCircle />}
           navLabel="About"
           to="/about"
+        />
+        <StyledNavLink
+          icon={<CgProfile />}
+          navLabel="My Profile"
+          to="/myprofile"
         />
       </ul>
     </aside>

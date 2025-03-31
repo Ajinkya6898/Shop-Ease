@@ -77,7 +77,7 @@ export default function OrderSummary({ calculateTotal }) {
         </button>
       </div>
 
-      <button className=" mt-6 w-full  bg-brand-500 text-white py-3 rounded-lg text-lg font-semibold hover:bg-blue-600 transition transform hover:scale-105">
+      <button className=" mt-6 w-full  bg-brand-500 text-white py-3 rounded-lg text-lg font-semibold hover:bg-brand-600 transition transform hover:scale-105">
         Proceed to Checkout
       </button>
     </div>

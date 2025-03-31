@@ -15,6 +15,7 @@ const productSlice = createSlice({
     addToWishList(state, action) {
       state.wishListProducts.push(action.payload);
     },
+    moveToCart(state, action) {},
   },
 });
 

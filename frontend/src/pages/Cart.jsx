@@ -19,7 +19,7 @@ const Cart = () => {
 
   return (
     <>
-      <PageHeader pageHeading="Cart" />
+      <PageHeader pageHeading="Your Cart" />
       {cartProducts.length === 0 ? (
         <div className="flex flex-col items-center mt-10 space-y-5 text-gray-500">
           <MdOutlineRemoveShoppingCart className="text-6xl text-brand-500" />
