@@ -6,7 +6,7 @@ import Loader from "./Loader";
 
 const AppLayout = () => {
   const { state } = useNavigation();
-  console.log(state);
+
   if (state === "loading") {
     return <Loader />;
   }
@@ -15,7 +15,7 @@ const AppLayout = () => {
     <div className="grid grid-cols-[26rem_1fr] grid-rows-[auto_1fr] h-screen">
       <Header />
       <Sidebar />
-      <main className="bg-gradient-to-br to-blue-100 mt-12 px-[4.8rem] ">
+      <main className="bg-gradient-to-br to-blue-100 py-12 px-[4.8rem] overflow-y-scroll ">
         <Outlet />
       </main>
     </div>

@@ -5,9 +5,10 @@ import {
   HiOutlineHome,
   HiOutlineInformationCircle,
   HiOutlinePaperAirplane,
-  HiOutlineRectangleGroup,
   HiOutlineShoppingCart,
 } from "react-icons/hi2";
+import { HiOutlineClipboardList } from "react-icons/hi";
+import { FiBox } from "react-icons/fi";
 
 const StyledNavLink = ({ icon, navLabel, to }) => {
   return (
@@ -42,10 +43,11 @@ const Sidebar = () => {
     <aside className="bg-white p-[3.2rem_2.4rem]  border-r-2 border-[#f3f4f6] row-span-full">
       <ul className="">
         <StyledNavLink icon={<HiOutlineHome />} navLabel="Home" to="/" />
+        <StyledNavLink icon={<FiBox />} navLabel="Products" to="/products" />
         <StyledNavLink
-          icon={<HiOutlineRectangleGroup />}
-          navLabel="Products"
-          to="/products"
+          icon={<HiOutlineClipboardList />}
+          navLabel="Orders"
+          to="/orders"
         />
         <StyledNavLink
           icon={<HiOutlineHeart />}

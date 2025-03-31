@@ -1,70 +1,86 @@
 import React from "react";
 import Alert from "../ui-components/Alert";
-import Card from "../ui-components/Card";
+import { useSelector, useDispatch } from "react-redux";
+import MESSAGES from "../constant";
+import { FaTrash, FaPlus, FaMinus } from "react-icons/fa";
+import OrderSummary from "../ui-components/OrderSummary";
+import PageHeader from "../ui-components/PageHeader";
+import { MdOutlineRemoveShoppingCart } from "react-icons/md";
 
 const Cart = () => {
-  const pro = [
-    {
-      id: 1,
-      name: "Essence Mascara Lash Princess",
-      description:
-        "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.",
-      category: "beauty",
-      price: 9.99,
-      discountPercentage: 7.17,
-      rating: 4.94,
-      stock: 5,
-      tags: ["beauty", "mascara"],
-      brand: "Essence",
-      sku: "RCH45Q1A",
-      weight: 2,
-      dimensions: { width: 23.17, height: 14.43, depth: 28.01 },
-      warrantyInformation: "1 month warranty",
-      shippingInformation: "Ships in 1 month",
-      availabilityStatus: "Low Stock",
-      reviews: [
-        {
-          rating: 2,
-          comment: "Very unhappy with my purchase!",
-          date: "2024-05-23T08:56:21.618Z",
-          reviewerName: "John Doe",
-          reviewerEmail: "john.doe@x.dummyjson.com",
-        },
-        {
-          rating: 2,
-          comment: "Not as described!",
-          date: "2024-05-23T08:56:21.618Z",
-          reviewerName: "Nolan Gonzalez",
-          reviewerEmail: "nolan.gonzalez@x.dummyjson.com",
-        },
-        {
-          rating: 5,
-          comment: "Very satisfied!",
-          date: "2024-05-23T08:56:21.618Z",
-          reviewerName: "Scarlett Wright",
-          reviewerEmail: "scarlett.wright@x.dummyjson.com",
-        },
-      ],
-      returnPolicy: "30 days return policy",
-      minimumOrderQuantity: 24,
-      meta: {
-        createdAt: "2024-05-23T08:56:21.618Z",
-        updatedAt: "2024-05-23T08:56:21.618Z",
-        barcode: "9164035109868",
-        qrCode: "https://assets.dummyjson.com/public/qr-code.png",
-      },
-      images: [
-        "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/1.png",
-      ],
-      thumbnail:
-        "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png",
-    },
-  ];
+  const cartProducts = useSelector((state) => state.product.cartProducts);
+  const dispatch = useDispatch();
+
+  const calculateTotal = () =>
+    cartProducts.reduce(
+      (total, product) => total + product.price * product.quantity,
+      0
+    );
+
   return (
-    <div>
-      <Alert type="info" message="Nothing in cart" />
-      <Card product={pro[0]} />
-    </div>
+    <>
+      <PageHeader pageHeading="Cart" />
+      {cartProducts.length === 0 ? (
+        <div className="flex flex-col items-center mt-10 space-y-5 text-gray-500">
+          <MdOutlineRemoveShoppingCart className="text-6xl text-brand-500" />
+          <Alert type="info" message={MESSAGES.CART_EMPTY} />
+        </div>
+      ) : (
+        <>
+          <div className="max-w-8xl mx-auto p-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className="lg:col-span-2 bg-white rounded-2xl shadow-lg p-6">
+                {cartProducts.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex items-center justify-between border-b py-4"
+                  >
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-20 h-20 object-cover rounded-lg"
+                    />
+
+                    <div className="flex-1 ml-4">
+                      <h3 className="text-lg font-semibold">{item.title}</h3>
+                      <p className="text-gray-500">₹ {item.price.toFixed(2)}</p>
+                    </div>
+
+                    <div className="flex items-center">
+                      <button
+                        onClick={() =>
+                          updateQuantity(item.id, item.quantity - 1)
+                        }
+                        className="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded-md"
+                      >
+                        −
+                      </button>
+                      <span className="mx-3 font-medium">{item.quantity}</span>
+                      <button
+                        onClick={() =>
+                          updateQuantity(item.id, item.quantity + 1)
+                        }
+                        className="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded-md"
+                      >
+                        +
+                      </button>
+                    </div>
+                    <button
+                      onClick={() => removeItem(item.id)}
+                      className="ml-4 text-red-500 hover:text-red-700"
+                    >
+                      <FaTrash size={18} />
+                    </button>
+                  </div>
+                ))}
+              </div>
+
+              <OrderSummary calculateTotal={calculateTotal} />
+            </div>
+          </div>
+        </>
+      )}
+    </>
   );
 };
 

@@ -9,6 +9,7 @@ import Wishlist from "./pages/Wishlist";
 import Cart from "./pages/Cart";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
+import Orders from "./pages/Orders";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Dashboard /> },
       { path: "/products", element: <Products />, loader: productsLoader },
+      { path: "/orders", element: <Orders /> },
       { path: "/wishlist", element: <Wishlist /> },
       { path: "/cart", element: <Cart /> },
       { path: "/contact", element: <Contact /> },
