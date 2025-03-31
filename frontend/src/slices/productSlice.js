@@ -49,11 +49,19 @@ const productSlice = createSlice({
         (p) => p.id === action.payload.id
       );
 
-      if (product) {
+      const alreadyInCart = state.cartProducts.some((elem) => {
+        return (elem.id = action.payload.id);
+      });
+
+      if (product && !alreadyInCart) {
         state.cartProducts.push({
           ...product,
           quantity: action.payload.quantity || 1,
         });
+        state.wishListProducts = state.wishListProducts.filter(
+          (element) => element.id !== product.id
+        );
+      } else {
         state.wishListProducts = state.wishListProducts.filter(
           (element) => element.id !== product.id
         );
