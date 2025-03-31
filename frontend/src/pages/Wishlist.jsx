@@ -1,16 +1,40 @@
 import React from "react";
 import Alert from "../ui-components/Alert";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import MESSAGES from "../constant";
 import PageHeader from "../ui-components/PageHeader";
 import { FaHeartBroken } from "react-icons/fa";
 import { RiDeleteBin7Line } from "react-icons/ri";
 import { HiOutlineShoppingCart } from "react-icons/hi2";
+import { moveToCart, removeFromWishlist } from "../slices/productSlice";
+import { useModal } from "../ui-components/ModalProvider";
 
 const Wishlist = () => {
+  const dispatch = useDispatch();
+  const { modalDispatch } = useModal();
   const wishlistProducts = useSelector(
     (state) => state.product.wishListProducts
   );
+
+  function removeItem(productId) {
+    modalDispatch({
+      type: "warning",
+      message: "Do you want to remove this Item from Wishlist?",
+      onConfirm: () => {
+        dispatch(removeFromWishlist(item.id));
+      },
+    });
+  }
+
+  function addToCart(product) {
+    dispatch(
+      moveToCart({
+        ...product,
+        quantity: 1,
+      })
+    );
+  }
+
   return (
     <>
       <PageHeader pageHeading="Your Wishlist" />
@@ -41,7 +65,7 @@ const Wishlist = () => {
 
               <div className="flex mt-5 space-x-3">
                 <button
-                  onClick={() => moveToCart(item.id)}
+                  onClick={() => addToCart(item)}
                   className="flex items-center space-x-2 bg-brand-500 text-white px-4 py-2 rounded-full font-semibold shadow-md hover:from-blue-600 hover:to-indigo-600 transition cursor-pointer"
                 >
                   <span className="text-2xl">
@@ -50,7 +74,7 @@ const Wishlist = () => {
                   <span>Move to Cart</span>
                 </button>
                 <button
-                  onClick={() => removeFromWishlist(item.id)}
+                  onClick={() => removeItem(item.id)}
                   className="flex items-center space-x-2 bg-red-500  text-white px-4 py-2 rounded-full font-semibold shadow-md hover:from-red-600 hover:to-pink-600 transition cursor-pointer"
                 >
                   <span className="text-2xl">

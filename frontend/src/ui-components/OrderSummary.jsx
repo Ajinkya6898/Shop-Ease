@@ -2,8 +2,20 @@ import { useState } from "react";
 import FormRow from "./FormRow";
 import { useForm } from "react-hook-form";
 import { AiOutlineShopping } from "react-icons/ai";
+import { useSelector } from "react-redux";
 
-export default function OrderSummary({ calculateTotal }) {
+export default function OrderSummary() {
+  const cartProducts = useSelector((state) => state.product.cartProducts);
+
+  const calculateTotal = () => {
+    if (!cartProducts || !Array.isArray(cartProducts)) return 0;
+
+    return cartProducts.reduce(
+      (total, product) => total + product.price * (product.quantity || 1),
+      0
+    );
+  };
+
   const [promoCode, setPromoCode] = useState("");
   const [discount, setDiscount] = useState(0);
   const shippingCost = 50;
@@ -23,11 +35,8 @@ export default function OrderSummary({ calculateTotal }) {
 
   const applyPromoCode = () => {
     if (!promoCodeValue) {
-      console.log("Promo code is empty!");
       return;
     }
-
-    console.log("Applying promo code:", errors.promocode?.message);
   };
 
   return (

@@ -2,20 +2,20 @@ import React from "react";
 import Alert from "../ui-components/Alert";
 import { useSelector, useDispatch } from "react-redux";
 import MESSAGES from "../constant";
-import { FaTrash, FaPlus, FaMinus } from "react-icons/fa";
+import { FaPlus, FaMinus } from "react-icons/fa";
 import OrderSummary from "../ui-components/OrderSummary";
 import PageHeader from "../ui-components/PageHeader";
 import { MdOutlineRemoveShoppingCart } from "react-icons/md";
+import { AiOutlineDelete } from "react-icons/ai";
+import {
+  decreaseProductQty,
+  increaseProductQty,
+  removeFromCart,
+} from "../slices/productSlice";
 
 const Cart = () => {
   const cartProducts = useSelector((state) => state.product.cartProducts);
   const dispatch = useDispatch();
-
-  const calculateTotal = () =>
-    cartProducts.reduce(
-      (total, product) => total + product.price * product.quantity,
-      0
-    );
 
   return (
     <>
@@ -42,43 +42,46 @@ const Cart = () => {
                     />
 
                     <div className="flex-1 ml-5">
-                      <h3 className="text-lg font-semibold">{item.title}</h3>
-                      <p className="text-gray-500">₹ {item.price.toFixed(2)}</p>
+                      <h3 className="text-lg font-semibold capitalize">
+                        {item.title}
+                      </h3>
+                      <p className="text-gray-500 mt-2 capitalize">
+                        {item.category}
+                      </p>
+                      <p className="text-gray-900 font-semibold mt-2">
+                        ₹ {item.price.toFixed(2)}
+                      </p>
                     </div>
 
                     <div className="flex items-center">
                       <button
-                        onClick={() =>
-                          updateQuantity(item.id, item.quantity - 1)
-                        }
-                        className="w-9 h-9 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center text-lg font-bold"
+                        onClick={() => dispatch(decreaseProductQty(item.id))}
+                        className="w-9 h-9 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center cursor-pointer"
                       >
-                        −
+                        <FaMinus />
                       </button>
                       <span className="mx-4 font-semibold text-lg">
                         {item.quantity}
                       </span>
                       <button
-                        onClick={() =>
-                          updateQuantity(item.id, item.quantity + 1)
-                        }
-                        className="w-9 h-9 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center text-lg font-bold"
+                        onClick={() => dispatch(increaseProductQty(item.id))}
+                        className="w-9 h-9 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center cursor-pointer"
                       >
-                        +
+                        <FaPlus />
                       </button>
                     </div>
 
                     <button
-                      onClick={() => removeItem(item.id)}
-                      className="ml-5 text-red-500 hover:text-red-700"
+                      onClick={() => dispatch(removeFromCart(item.id))}
+                      className="ml-5 text-red-500 hover:text-red-700 cursor-pointer"
                     >
-                      <FaTrash size={20} />
+                      <AiOutlineDelete size={28} />
                     </button>
                   </div>
                 ))}
               </div>
 
-              <OrderSummary calculateTotal={calculateTotal} />
+              <OrderSummary />
             </div>
           </div>
         </>
