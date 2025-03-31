@@ -11,6 +11,7 @@ import Contact from "./pages/Contact";
 import About from "./pages/About";
 import Orders from "./pages/Orders";
 import ProfilePage from "./pages/Myprofile";
+import ProtectedRoute from "./ui-components/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -19,12 +20,54 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Dashboard /> },
       { path: "/products", element: <Products />, loader: productsLoader },
-      { path: "/orders", element: <Orders /> },
-      { path: "/wishlist", element: <Wishlist /> },
-      { path: "/cart", element: <Cart /> },
-      { path: "/contact", element: <Contact /> },
-      { path: "/about", element: <About /> },
-      { path: "/myprofile", element: <ProfilePage /> },
+      {
+        path: "/orders",
+        element: (
+          <ProtectedRoute>
+            <Orders />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/wishlist",
+        element: (
+          <ProtectedRoute>
+            <Wishlist />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/cart",
+        element: (
+          <ProtectedRoute>
+            <Cart />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/contact",
+        element: (
+          <ProtectedRoute>
+            <Contact />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/about",
+        element: (
+          <ProtectedRoute>
+            <About />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/myprofile",
+        element: (
+          <ProtectedRoute>
+            <ProfilePage />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
   { path: "/login", element: <Login /> },

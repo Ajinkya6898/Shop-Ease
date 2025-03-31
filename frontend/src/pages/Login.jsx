@@ -44,8 +44,9 @@ const Login = () => {
               name="userName"
               onChange={handleInputChange}
               type="email"
+              autoComplete="off"
               placeholder="Enter your email"
-              className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-300 focus:outline-none"
             />
           </div>
 
@@ -59,13 +60,13 @@ const Login = () => {
               onChange={handleInputChange}
               type="password"
               placeholder="Enter your password"
-              className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-300 focus:outline-none"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white p-3 rounded-lg font-semibold hover:bg-blue-400 transition"
+            className="w-full bg-brand-500 text-white p-3 rounded-lg font-semibold hover:bg-brand-600 transition"
           >
             Sign In
           </button>
@@ -76,7 +77,7 @@ const Login = () => {
             Don't have an account?
             <NavLink
               to="/signup"
-              className="text-blue-500 font-medium hover:underline"
+              className="text-brand-500 font-medium hover:underline"
             >
               {" "}
               Sign up
@@ -85,7 +86,7 @@ const Login = () => {
           <p className="mt-2">
             <NavLink
               to="/forgotpass"
-              className="text-blue-500 font-medium hover:underline"
+              className="text-brand-500 font-medium hover:underline"
             >
               Forgot Password?
             </NavLink>
