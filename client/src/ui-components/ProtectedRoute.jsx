@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children }) => {
-  const { isLoggedIn } = JSON.parse(localStorage.getItem("userInfo"));
+  const { isLoggedIn } = JSON.parse(localStorage.getItem("userInfo")) || {};
   const navigate = useNavigate();
 
   useEffect(() => {
