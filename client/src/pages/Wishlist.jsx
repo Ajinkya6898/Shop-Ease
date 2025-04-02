@@ -16,12 +16,18 @@ const Wishlist = () => {
     (state) => state.product.wishListProducts
   );
 
-  function removeItem(productId) {
+  function removeItem(product) {
     modalDispatch({
       type: "warning",
-      message: "Do you want to remove this Item from Wishlist?",
+      message: (
+        <>
+          Are you sure you want to remove <br /> <br />
+          <p className="text-brand-500">{product.title}</p> <br />
+          this item from the wishlist?
+        </>
+      ),
       onConfirm: () => {
-        dispatch(removeFromWishlist(item.id));
+        dispatch(removeFromWishlist(product.id));
       },
     });
   }
@@ -74,7 +80,7 @@ const Wishlist = () => {
                   <span>Move to Cart</span>
                 </button>
                 <button
-                  onClick={() => removeItem(item.id)}
+                  onClick={() => removeItem(item)}
                   className="flex items-center space-x-2 bg-red-500  text-white px-4 py-2 rounded-full font-semibold shadow-md hover:from-red-600 hover:to-pink-600 transition cursor-pointer"
                 >
                   <span className="text-2xl">

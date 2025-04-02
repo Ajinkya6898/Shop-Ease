@@ -12,6 +12,7 @@ import About from "./pages/About";
 import Orders from "./pages/Orders";
 import ProfilePage from "./pages/Myprofile";
 import ProtectedRoute from "./ui-components/ProtectedRoute";
+import Payment from "./pages/Payment";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <ProfilePage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/payment",
+        element: (
+          <ProtectedRoute>
+            <Payment />
           </ProtectedRoute>
         ),
       },

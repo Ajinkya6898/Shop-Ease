@@ -12,82 +12,83 @@ export default function ProfileSettings() {
   const [formData, setFormData] = useState({
     name: "John Doe",
     email: "johndoe@example.com",
+    currentEmail: "",
+    newEmail: "",
     mobile: "+1234567890",
-    password: "********",
+    currentMobile: "",
+    newMobile: "",
+    currentPassword: "",
+    newPassword: "",
+    confirmNewPassword: "",
   });
 
   const [editMode, setEditMode] = useState(false);
+  const [passwordError, setPasswordError] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const validatePassword = (password) => {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
+    return regex.test(password);
+  };
+
+  const handlePasswordChange = (e) => {
+    const newPassword = e.target.value;
+    setFormData({ ...formData, newPassword });
+    setPasswordError(
+      validatePassword(newPassword)
+        ? ""
+        : "Password must contain at least 1 uppercase letter, 1 number, 1 special character, and be at least 8 characters long."
+    );
+  };
+
   return (
-    <div className="min-h-screen  text-white flex items-center justify-center">
+    <div className="min-h-screen text-white flex items-center justify-center">
       <div className="w-full max-w-md p-6 rounded-lg shadow-xl">
         <h2 className="text-2xl font-bold text-center mb-6">
           Profile Settings
         </h2>
 
-        {/* Name */}
-        <div className="flex items-center space-x-3 mb-4">
-          <FaUser className="text-gray-400" />
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            disabled={!editMode}
-            onChange={handleChange}
-            className={`w-full p-2 bg-gray-700 rounded-lg focus:outline-none ${
-              editMode ? "border border-blue-500" : "border-none"
-            }`}
-          />
-        </div>
-
-        {/* Email */}
-        <div className="flex items-center space-x-3 mb-4">
-          <FaEnvelope className="text-gray-400" />
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            disabled={!editMode}
-            onChange={handleChange}
-            className={`w-full p-2 bg-gray-700 rounded-lg focus:outline-none ${
-              editMode ? "border border-blue-500" : "border-none"
-            }`}
-          />
-        </div>
-
-        {/* Mobile */}
-        <div className="flex items-center space-x-3 mb-4">
-          <FaPhone className="text-gray-400" />
-          <input
-            type="text"
-            name="mobile"
-            value={formData.mobile}
-            disabled={!editMode}
-            onChange={handleChange}
-            className={`w-full p-2 bg-gray-700 rounded-lg focus:outline-none ${
-              editMode ? "border border-blue-500" : "border-none"
-            }`}
-          />
-        </div>
-
-        {/* Password */}
-        <div className="flex items-center space-x-3 mb-6">
-          <FaLock className="text-gray-400" />
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            disabled={!editMode}
-            onChange={handleChange}
-            className={`w-full p-2 bg-gray-700 rounded-lg focus:outline-none ${
-              editMode ? "border border-blue-500" : "border-none"
-            }`}
-          />
-        </div>
+        {/* Password Update */}
+        {editMode && (
+          <>
+            <div className="flex flex-col mb-4">
+              <label className="mb-1">Current Password</label>
+              <input
+                type="password"
+                name="currentPassword"
+                value={formData.currentPassword}
+                onChange={handleChange}
+                className="w-full p-2 bg-gray-700 rounded-lg focus:outline-none border border-gray-600"
+              />
+            </div>
+            <div className="flex flex-col mb-4">
+              <label className="mb-1">New Password</label>
+              <input
+                type="password"
+                name="newPassword"
+                value={formData.newPassword}
+                onChange={handlePasswordChange}
+                className="w-full p-2 bg-gray-700 rounded-lg focus:outline-none border border-gray-600"
+              />
+              {passwordError && (
+                <p className="text-red-500 text-sm mt-1">{passwordError}</p>
+              )}
+            </div>
+            <div className="flex flex-col mb-6">
+              <label className="mb-1">Confirm New Password</label>
+              <input
+                type="password"
+                name="confirmNewPassword"
+                value={formData.confirmNewPassword}
+                onChange={handleChange}
+                className="w-full p-2 bg-gray-700 rounded-lg focus:outline-none border border-gray-600"
+              />
+            </div>
+          </>
+        )}
 
         {/* Buttons */}
         <div className="flex justify-between">

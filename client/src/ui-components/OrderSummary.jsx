@@ -18,7 +18,7 @@ export default function OrderSummary() {
 
   const [promoCode, setPromoCode] = useState("");
   const [discount, setDiscount] = useState(0);
-  const shippingCost = 50;
+  const shippingCost = calculateTotal() > 999 ? 0 : 50;
   const tax = 0.18;
   const subtotal = calculateTotal();
   const discountAmount = (subtotal * discount) / 100;
@@ -51,8 +51,15 @@ export default function OrderSummary() {
           <span>Subtotal:</span> <span>₹ {subtotal.toFixed(2)}</span>
         </p>
         <p className="flex justify-between">
-          <span>Delivery Charges:</span>{" "}
-          <span>₹ {shippingCost.toFixed(2)}</span>
+          <span>Delivery Charges:</span>
+          {subtotal > 999 ? (
+            <span>
+              <s className="text-gray-500">₹ {shippingCost.toFixed(2)}</s>{" "}
+              <span className="font-semibold ml-2">₹0</span>
+            </span>
+          ) : (
+            <span>₹ {shippingCost.toFixed(2)}</span>
+          )}
         </p>
         <p className="flex justify-between">
           <span>GST (18%):</span> <span>₹ {taxAmount.toFixed(2)}</span>
@@ -86,7 +93,7 @@ export default function OrderSummary() {
         </button>
       </div>
 
-      <button className=" mt-6 w-full  bg-brand-500 text-white py-3 rounded-lg text-lg font-semibold hover:bg-brand-600 transition transform hover:scale-105">
+      <button className=" mt-6 w-full  bg-brand-500 text-white py-3 rounded-lg text-lg font-semibold hover:bg-brand-600 transition transform hover:scale-105 cursor-pointer">
         Proceed to Checkout
       </button>
     </div>

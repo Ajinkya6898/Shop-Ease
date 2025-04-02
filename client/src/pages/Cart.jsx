@@ -12,10 +12,28 @@ import {
   increaseProductQty,
   removeFromCart,
 } from "../slices/productSlice";
+import { useModal } from "../ui-components/ModalProvider";
 
 const Cart = () => {
   const cartProducts = useSelector((state) => state.product.cartProducts);
   const dispatch = useDispatch();
+  const { modalDispatch } = useModal();
+
+  function removeProduct(product) {
+    modalDispatch({
+      type: "warning",
+      message: (
+        <>
+          Are you sure you want to remove <br /> <br />
+          <p className="text-brand-500">{product.title}</p> <br />
+          this item from the cart?
+        </>
+      ),
+      onConfirm: () => {
+        dispatch(removeFromCart(product.id));
+      },
+    });
+  }
 
   return (
     <>
@@ -72,7 +90,7 @@ const Cart = () => {
                     </div>
 
                     <button
-                      onClick={() => dispatch(removeFromCart(item.id))}
+                      onClick={() => removeProduct(item)}
                       className="ml-5 text-red-500 hover:text-red-700 cursor-pointer"
                     >
                       <AiOutlineDelete size={28} />
