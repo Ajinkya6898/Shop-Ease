@@ -51,7 +51,7 @@ const StyledNavLink = ({ icon, navLabel, to, count }) => {
 const Sidebar = () => {
   const wishlistCount = useSelector((state) => state.product.wishListProducts);
   const cartCount = useSelector((state) => state.product.cartProducts);
-  console.log(wishlistCount, cartCount);
+
   return (
     <aside className="bg-white p-[3.2rem_2.4rem]  border-r-2 border-[#f3f4f6] row-span-full">
       <ul className="">

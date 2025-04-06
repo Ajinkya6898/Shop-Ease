@@ -13,21 +13,15 @@ const Products = () => {
     <>
       <Container maxWidth="max-w-9xl" hasPageActionBar={true}>
         <PageActionContainer
-          leftContent={
-            <h2 className="text-2xl font-semibold">Your Wishlist</h2>
-          }
+          pageHeading="Products"
           rightContent={
             <>
-              <Button appearance="error" onClick={() => handleClearWishlist()}>
-                Clear Wishlist
-              </Button>
               <Button variant="outlined">Sort by Price</Button>
             </>
           }
         />
       </Container>
-      <Container maxWidth="max-w-9xl mt-5">
-        <PageHeader pageHeading="Products" />
+      <Container maxWidth="max-w-9xl">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           {products.map((product, index) => (
             <div key={index}>

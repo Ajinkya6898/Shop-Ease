@@ -1,9 +1,9 @@
 import { useState } from "react";
-import FormRow from "./FormRow";
+import FormRow from "../ui-components/FormRow";
 import { useForm } from "react-hook-form";
 import { AiOutlineShopping } from "react-icons/ai";
 import { useSelector } from "react-redux";
-import Button from "./Button";
+import Button from "../ui-components/Button";
 
 export default function OrderSummary() {
   const cartProducts = useSelector((state) => state.product.cartProducts);
