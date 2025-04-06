@@ -1,122 +1,212 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import PageHeader from "../ui-components/PageHeader";
 import {
-  FaUser,
-  FaEnvelope,
   FaLock,
-  FaPhone,
-  FaSave,
-  FaTimes,
+  FaExclamationCircle,
+  FaCheckCircle,
+  FaTimesCircle,
+  FaEnvelope,
 } from "react-icons/fa";
+import Container from "../ui-components/Container";
+import { PASSWORD_DONTS, PASSWORD_DOS } from "../constant";
 
-export default function ProfileSettings() {
-  const [formData, setFormData] = useState({
-    name: "John Doe",
-    email: "johndoe@example.com",
-    currentEmail: "",
-    newEmail: "",
-    mobile: "+1234567890",
-    currentMobile: "",
-    newMobile: "",
+const MyProfile = () => {
+  const [form, setForm] = useState({
     currentPassword: "",
     newPassword: "",
-    confirmNewPassword: "",
+    confirmPassword: "",
+    currentEmail: "",
+    newEmail: "",
   });
 
-  const [editMode, setEditMode] = useState(false);
-  const [passwordError, setPasswordError] = useState("");
+  const [error, setError] = useState("");
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  function handleChange(e) {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  }
 
-  const validatePassword = (password) => {
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
-    return regex.test(password);
-  };
+  function handleSubmit(e) {
+    e.preventDefault();
 
-  const handlePasswordChange = (e) => {
-    const newPassword = e.target.value;
-    setFormData({ ...formData, newPassword });
-    setPasswordError(
-      validatePassword(newPassword)
-        ? ""
-        : "Password must contain at least 1 uppercase letter, 1 number, 1 special character, and be at least 8 characters long."
-    );
-  };
+    if (form.newPassword !== form.confirmPassword) {
+      setError("New password and confirm password do not match.");
+      return;
+    }
+
+    if (form.newPassword.length > 0 && form.newPassword.length < 8) {
+      setError("Password must be at least 8 characters long.");
+      return;
+    }
+
+    setError("");
+    console.log("Form submitted successfully:", form);
+  }
+
+  function handleCancel() {
+    setForm({
+      currentPassword: "",
+      newPassword: "",
+      confirmPassword: "",
+      currentEmail: "",
+      newEmail: "",
+    });
+    setError("");
+  }
 
   return (
-    <div className="min-h-screen text-white flex items-center justify-center">
-      <div className="w-full max-w-md p-6 rounded-lg shadow-xl">
-        <h2 className="text-2xl font-bold text-center mb-6">
-          Profile Settings
-        </h2>
+    <>
+      <Container maxWidth="max-w-5xl">
+        <PageHeader pageHeading="My Profile" />
 
-        {/* Password Update */}
-        {editMode && (
-          <>
-            <div className="flex flex-col mb-4">
-              <label className="mb-1">Current Password</label>
-              <input
-                type="password"
-                name="currentPassword"
-                value={formData.currentPassword}
-                onChange={handleChange}
-                className="w-full p-2 bg-gray-700 rounded-lg focus:outline-none border border-gray-600"
-              />
-            </div>
-            <div className="flex flex-col mb-4">
-              <label className="mb-1">New Password</label>
-              <input
-                type="password"
-                name="newPassword"
-                value={formData.newPassword}
-                onChange={handlePasswordChange}
-                className="w-full p-2 bg-gray-700 rounded-lg focus:outline-none border border-gray-600"
-              />
-              {passwordError && (
-                <p className="text-red-500 text-sm mt-1">{passwordError}</p>
-              )}
-            </div>
-            <div className="flex flex-col mb-6">
-              <label className="mb-1">Confirm New Password</label>
-              <input
-                type="password"
-                name="confirmNewPassword"
-                value={formData.confirmNewPassword}
-                onChange={handleChange}
-                className="w-full p-2 bg-gray-700 rounded-lg focus:outline-none border border-gray-600"
-              />
-            </div>
-          </>
-        )}
+        <form onSubmit={handleSubmit} className="space-y-12">
+          <section>
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">
+              Change Password
+            </h2>
 
-        {/* Buttons */}
-        <div className="flex justify-between">
-          {editMode ? (
-            <>
-              <button
-                className="flex items-center space-x-2 bg-green-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-green-700 transition"
-                onClick={() => setEditMode(false)}
-              >
-                <FaSave /> <span>Save</span>
-              </button>
-              <button
-                className="flex items-center space-x-2 bg-red-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-red-600 transition"
-                onClick={() => setEditMode(false)}
-              >
-                <FaTimes /> <span>Cancel</span>
-              </button>
-            </>
-          ) : (
-            <button
-              className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition"
-              onClick={() => setEditMode(true)}
-            >
-              Edit Profile
-            </button>
-          )}
+            <div className="text-center text-gray-600">
+              <FaLock className="mx-auto text-5xl text-brand-500 mb-4" />
+              <p className="text-base">
+                Keep your account secure by using a strong and unique password.
+              </p>
+            </div>
+
+            <div className="bg-gray-100 flex justify-between p-4 rounded-lg mt-6 text-sm gap-8 flex-wrap sm:flex-nowrap">
+              <div className="flex flex-col">
+                <p className="flex items-center text-xl gap-2 font-semibold text-gray-700 mb-2">
+                  <FaCheckCircle className="text-green-600" />
+                  Do's
+                </p>
+                <ul className="list-disc list-inside space-y-1 text-gray-600">
+                  {PASSWORD_DOS.map((text) => {
+                    return (
+                      <li key={text} className="text-base">
+                        {text}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+
+              <div className="flex flex-col">
+                <p className="flex items-center text-xl gap-2 font-semibold text-gray-700 mb-2">
+                  <FaTimesCircle className="text-red-500" />
+                  Don'ts
+                </p>
+                <ul className="list-disc list-inside space-y-1 text-gray-600">
+                  {PASSWORD_DONTS.map((text) => {
+                    return (
+                      <li key={text} className="text-base">
+                        {text}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            </div>
+
+            <div className="mt-6 space-y-4">
+              <div>
+                <label className="block text-gray-700 text-lg mb-1">
+                  Current Password
+                </label>
+                <input
+                  type="password"
+                  name="currentPassword"
+                  value={form.currentPassword}
+                  onChange={handleChange}
+                  placeholder="Enter current password"
+                  className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-300 focus:outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="block text-gray-700 text-lg mb-1">
+                  New Password
+                </label>
+                <input
+                  type="password"
+                  name="newPassword"
+                  value={form.newPassword}
+                  onChange={handleChange}
+                  placeholder="Enter new password"
+                  className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-300 focus:outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="block text-gray-700 text-lg mb-1">
+                  Confirm New Password
+                </label>
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  value={form.confirmPassword}
+                  onChange={handleChange}
+                  placeholder="Re-enter new password"
+                  className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-300 focus:outline-none"
+                />
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">
+              Update Email Address
+            </h2>
+
+            <div className="space-y-4">
+              <div>
+                <label className="block text-gray-700 text-lg mb-1">
+                  Current Email
+                </label>
+                <input
+                  type="email"
+                  name="currentEmail"
+                  value={form.currentEmail}
+                  onChange={handleChange}
+                  placeholder="Enter current email"
+                  className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-300 focus:outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="block text-gray-700 text-lg mb-1">
+                  New Email
+                </label>
+                <input
+                  type="email"
+                  name="newEmail"
+                  value={form.newEmail}
+                  onChange={handleChange}
+                  placeholder="Enter new email"
+                  className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-300 focus:outline-none"
+                />
+              </div>
+            </div>
+          </section>
+        </form>
+      </Container>
+      <Container maxWidth="max-w-5xl" className="mt-6">
+        <div className="flex justify-end gap-4 px-2">
+          <button
+            type="button"
+            onClick={handleCancel}
+            className="px-6 py-3 rounded-lg font-medium text-gray-700 border border-gray-300 hover:bg-gray-100 transition cursor-pointer"
+          >
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+            className="bg-brand-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-brand-600 transition focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 outline-0 ring-offset-white cursor-pointer"
+          >
+            Save Changes
+          </button>
         </div>
-      </div>
-    </div>
+      </Container>
+    </>
   );
-}
+};
+
+export default MyProfile;

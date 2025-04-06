@@ -1,7 +1,7 @@
 import React from "react";
 import Alert from "../ui-components/Alert";
 import { useDispatch, useSelector } from "react-redux";
-import MESSAGES from "../constant";
+import { MESSAGES } from "../constant";
 import PageHeader from "../ui-components/PageHeader";
 import { FaHeartBroken } from "react-icons/fa";
 import { RiDeleteBin7Line } from "react-icons/ri";

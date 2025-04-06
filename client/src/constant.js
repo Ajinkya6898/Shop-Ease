@@ -11,4 +11,16 @@ const MESSAGES = {
   EMPTY_ORDERS: "You haven't placed any order yet!!!",
 };
 
-export default MESSAGES;
+const PASSWORD_DOS = [
+  "Use at least 8 characters.",
+  "Include a mix of letters, numbers, and symbols.",
+  "Change your password regularly.",
+];
+
+const PASSWORD_DONTS = [
+  "Don't reuse old passwords.",
+  "Don't use easily guessable info (like your name).",
+  "Don't share your password with others.",
+];
+
+export { MESSAGES, PASSWORD_DOS, PASSWORD_DONTS };

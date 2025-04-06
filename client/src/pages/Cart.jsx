@@ -1,7 +1,7 @@
 import React from "react";
 import Alert from "../ui-components/Alert";
 import { useSelector, useDispatch } from "react-redux";
-import MESSAGES from "../constant";
+import { MESSAGES } from "../constant";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import OrderSummary from "../ui-components/OrderSummary";
 import PageHeader from "../ui-components/PageHeader";

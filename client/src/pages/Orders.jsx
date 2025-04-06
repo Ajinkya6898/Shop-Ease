@@ -2,7 +2,7 @@ import React from "react";
 import { HiOutlineClipboard } from "react-icons/hi2";
 import PageHeader from "../ui-components/PageHeader";
 import Alert from "../ui-components/Alert";
-import MESSAGES from "../constant";
+import { MESSAGES } from "../constant";
 
 const Orders = () => {
   return (

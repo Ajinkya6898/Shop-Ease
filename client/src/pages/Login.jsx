@@ -85,7 +85,7 @@ const Login = () => {
           </p>
           <p className="mt-2">
             <NavLink
-              to="/forgotpass"
+              to="/forgot-password"
               className="text-brand-500 font-medium hover:underline"
             >
               Forgot Password?

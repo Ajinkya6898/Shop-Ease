@@ -13,6 +13,9 @@ import Orders from "./pages/Orders";
 import ProfilePage from "./pages/Myprofile";
 import ProtectedRoute from "./ui-components/ProtectedRoute";
 import Payment from "./pages/Payment";
+import ForgotPass from "./pages/ForgotPass";
+import VerifyOTP from "./pages/VerifyOTP";
+import ResetPassword from "./pages/ResetPassword";
 
 const router = createBrowserRouter([
   {
@@ -47,11 +50,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/contact",
-        element: (
-          <ProtectedRoute>
-            <Contact />
-          </ProtectedRoute>
-        ),
+        element: <Contact />,
       },
       {
         path: "/about",
@@ -81,6 +80,9 @@ const router = createBrowserRouter([
   },
   { path: "/login", element: <Login /> },
   { path: "/signup", element: <Signup /> },
+  { path: "/forgot-password", element: <ForgotPass /> },
+  { path: "/forgot-password/verify-otp", element: <VerifyOTP optLength={4} /> },
+  { path: "/forgot-password/reset", element: <ResetPassword /> },
 ]);
 
 const App = () => {
