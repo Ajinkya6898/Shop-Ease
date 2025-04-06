@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa";
 import Container from "../ui-components/Container";
 import { PASSWORD_DONTS, PASSWORD_DOS } from "../constant";
+import Button from "../ui-components/Button";
 
 const MyProfile = () => {
   const [form, setForm] = useState({
@@ -189,20 +190,18 @@ const MyProfile = () => {
       </Container>
       <Container maxWidth="max-w-5xl" className="mt-6">
         <div className="flex justify-end gap-4 px-2">
-          <button
+          <Button
             type="button"
             onClick={handleCancel}
-            className="px-6 py-3 rounded-lg font-medium text-gray-700 border border-gray-300 hover:bg-gray-100 transition cursor-pointer"
+            appearance="secondary"
+            variant="outlined"
           >
             Cancel
-          </button>
+          </Button>
 
-          <button
-            type="submit"
-            className="bg-brand-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-brand-600 transition focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 outline-0 ring-offset-white cursor-pointer"
-          >
+          <Button type="submit" size="medium">
             Save Changes
-          </button>
+          </Button>
         </div>
       </Container>
     </>

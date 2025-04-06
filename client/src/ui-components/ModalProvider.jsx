@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { FaTimes } from "react-icons/fa";
+import Button from "./Button";
 
 const ModalContext = createContext();
 
@@ -37,8 +38,8 @@ export function ModalProvider({ children }) {
       {children}
 
       {modal.isOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-opacity-70 z-50">
-          <div className="bg-white text-gray-950 p-6 rounded-2xl shadow-2xl border border-gray-300 max-w-lg w-full transform transition-all scale-105 opacity-100">
+        <div className="animate-fadeInScale fixed inset-0 flex items-center justify-center bg-opacity-70 z-50">
+          <div className="bg-white text-gray-950 p-6 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.3)] border border-gray-200 max-w-lg w-full transform transition-all scale-105 opacity-100">
             <div className="text-2xl font-bold pb-4 border-b flex justify-between items-center">
               <span
                 className={`${
@@ -71,26 +72,20 @@ export function ModalProvider({ children }) {
             <div className="flex justify-end mt-12">
               {modal.type === "warning" ? (
                 <>
-                  <button
+                  <Button
                     onClick={modal.onCancel}
-                    className="px-4 py-2 mr-4 text-gray-600 bg-gray-200 rounded-lg font-semibold hover:bg-gray-300 transition"
+                    appearance="secondary"
+                    variant="outlined"
                   >
                     Cancel
-                  </button>
-                  <button
-                    onClick={modal.onConfirm}
-                    className="px-4 py-2 text-white bg-brand-500 rounded-lg font-semibold hover:bg-brand-600 transition"
-                  >
+                  </Button>
+
+                  <Button className="ml-4" onClick={modal.onConfirm}>
                     Continue
-                  </button>
+                  </Button>
                 </>
               ) : (
-                <button
-                  onClick={modal.onConfirm}
-                  className="px-4 py-2 text-white bg-brand-500 rounded-lg font-semibold hover:bg-brand-600 transition"
-                >
-                  OK
-                </button>
+                <Button onClick={modal.onConfirm}>OK</Button>
               )}
             </div>
           </div>

@@ -2,6 +2,7 @@ import React from "react";
 import PageHeader from "../ui-components/PageHeader";
 import { NavLink } from "react-router-dom";
 import Container from "../ui-components/Container";
+import Button from "../ui-components/Button";
 
 const Signup = () => {
   return (
@@ -29,10 +30,9 @@ const Signup = () => {
           placeholder="Confirm Password"
           className="input-container"
         />
-
-        <button className="w-full bg-brand-500 text-white py-3 rounded-lg font-semibold hover:bg-brand-600 transition">
+        <Button type="submit" size="large" className="w-full">
           Sign Up
-        </button>
+        </Button>
       </form>
 
       <p className="text-center text-gray-700">

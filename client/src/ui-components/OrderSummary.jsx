@@ -3,6 +3,7 @@ import FormRow from "./FormRow";
 import { useForm } from "react-hook-form";
 import { AiOutlineShopping } from "react-icons/ai";
 import { useSelector } from "react-redux";
+import Button from "./Button";
 
 export default function OrderSummary() {
   const cartProducts = useSelector((state) => state.product.cartProducts);
@@ -85,17 +86,19 @@ export default function OrderSummary() {
           />
         </FormRow>
 
-        <button
+        <Button
           onClick={applyPromoCode}
+          appearance="secondary"
+          variant="outlined"
           className="self-end mt-0.5 text-brand-500 text-sm font-semibold hover:underline cursor-pointer transition duration-200"
         >
           Apply Promo Code
-        </button>
+        </Button>
       </div>
 
-      <button className=" mt-6 w-full  bg-brand-500 text-white py-3 rounded-lg text-lg font-semibold hover:bg-brand-600 transition transform hover:scale-105 cursor-pointer">
+      <Button size="large" className="mt-6 w-full">
         Proceed to Checkout
-      </button>
+      </Button>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FaCreditCard, FaPaypal, FaGoogleWallet } from "react-icons/fa";
 import Container from "../ui-components/Container";
+import Button from "../ui-components/Button"; // Adjust the path as needed
 
 export default function Payment() {
   const [paymentMethod, setPaymentMethod] = useState("creditCard");
@@ -12,36 +13,35 @@ export default function Payment() {
       </h2>
 
       <div className="space-y-4 mb-6">
-        <button
-          className={`w-full flex items-center gap-3 p-4 rounded-xl font-semibold transition ${
-            paymentMethod === "creditCard"
-              ? "bg-brand-500 outl text-white"
-              : "bg-gray-200 hover:bg-gray-300"
-          }`}
+        <Button
+          appearance={paymentMethod === "creditCard" ? "primary" : "secondary"}
+          variant={paymentMethod === "creditCard" ? "contained" : "outlined"}
+          n
+          className="w-full flex items-center gap-3 justify-center"
           onClick={() => setPaymentMethod("creditCard")}
         >
           <FaCreditCard className="text-xl" /> Credit / Debit Card
-        </button>
-        <button
-          className={`w-full flex items-center gap-3 p-4 rounded-xl font-semibold transition ${
-            paymentMethod === "paypal"
-              ? "bg-brand-500 outl text-white"
-              : "bg-gray-200 hover:bg-gray-300"
-          }`}
+        </Button>
+
+        <Button
+          appearance={paymentMethod === "paypal" ? "primary" : "secondary"}
+          variant={paymentMethod === "paypal" ? "contained" : "outlined"}
+          n
+          className="w-full flex items-center gap-3 justify-center"
           onClick={() => setPaymentMethod("paypal")}
         >
           <FaPaypal className="text-xl" /> PayPal
-        </button>
-        <button
-          className={`w-full flex items-center gap-3 p-4 rounded-xl font-semibold transition ${
-            paymentMethod === "upi"
-              ? "bg-brand-500 outl text-white"
-              : "bg-gray-200 hover:bg-gray-300"
-          }`}
+        </Button>
+
+        <Button
+          appearance={paymentMethod === "upi" ? "primary" : "secondary"}
+          variant={paymentMethod === "upi" ? "contained" : "outlined"}
+          n
+          className="w-full flex items-center gap-3 justify-center"
           onClick={() => setPaymentMethod("upi")}
         >
           <FaGoogleWallet className="text-xl" /> UPI / Google Pay
-        </button>
+        </Button>
       </div>
 
       {paymentMethod === "creditCard" && (
@@ -85,9 +85,9 @@ export default function Payment() {
         />
       )}
 
-      <button className=" mt-6 w-full  bg-brand-500 text-white py-3 rounded-lg text-lg font-semibold hover:bg-brand-600 transition transform hover:scale-105 cursor-pointer">
+      <Button appearance="primary" variant="contained" className="w-full">
         Pay Now
-      </button>
+      </Button>
     </Container>
   );
 }

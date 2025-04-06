@@ -4,6 +4,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../slices/userSlice";
 import Container from "../ui-components/Container";
+import Button from "../ui-components/Button";
 
 const Login = () => {
   const [userData, setUserData] = useState({
@@ -62,12 +63,9 @@ const Login = () => {
           />
         </div>
 
-        <button
-          type="submit"
-          className="w-full bg-brand-500 text-white p-3 rounded-lg font-semibold hover:bg-brand-600 transition"
-        >
+        <Button type="submit" size="large" className="w-full">
           Sign In
-        </button>
+        </Button>
       </form>
 
       <div className="text-center">

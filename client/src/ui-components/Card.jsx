@@ -1,6 +1,7 @@
 import { FaShoppingCart, FaStar, FaHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, addToWishList } from "../slices/productSlice";
+import Button from "./Button";
 
 export default function ProductCard({ product }) {
   const dispatch = useDispatch();
@@ -54,18 +55,20 @@ export default function ProductCard({ product }) {
           <span className="text-xl font-bold text-brand-600">
             ₹ {product.price}
           </span>
-          <button
+          <Button
             disabled={isInCart}
             onClick={() => handleAddToCart(product)}
-            className={`bg-brand-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2 
-              ${
-                isInCart
-                  ? "opacity-50 cursor-not-allowed"
-                  : "hover:bg-brand-700 transition"
-              }`}
+            size="medium"
+            appearance="primary"
+            variant="contained"
+            className={`flex items-center space-x-2 ${
+              isInCart
+                ? "opacity-50 cursor-not-allowed"
+                : "hover:bg-brand-700 transition"
+            }`}
           >
             <FaShoppingCart /> <span>Add to Cart</span>
-          </button>
+          </Button>
         </div>
       </div>
     </div>

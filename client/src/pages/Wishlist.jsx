@@ -9,6 +9,7 @@ import { HiOutlineShoppingCart } from "react-icons/hi2";
 import { moveToCart, removeFromWishlist } from "../slices/productSlice";
 import { useModal } from "../ui-components/ModalProvider";
 import Container from "../ui-components/Container";
+import Button from "../ui-components/Button";
 
 const Wishlist = () => {
   const dispatch = useDispatch();
@@ -71,24 +72,25 @@ const Wishlist = () => {
               </p>
 
               <div className="flex mt-5 space-x-3">
-                <button
+                <Button
                   onClick={() => addToCart(item)}
-                  className="flex items-center space-x-2 bg-brand-500 text-white px-4 py-2 rounded-full font-semibold shadow-md hover:from-blue-600 hover:to-indigo-600 transition cursor-pointer"
+                  className="flex items-center space-x-2"
                 >
                   <span className="text-2xl">
                     <HiOutlineShoppingCart />
                   </span>
                   <span>Move to Cart</span>
-                </button>
-                <button
+                </Button>
+                <Button
                   onClick={() => removeItem(item)}
-                  className="flex items-center space-x-2 bg-red-500  text-white px-4 py-2 rounded-full font-semibold shadow-md hover:from-red-600 hover:to-pink-600 transition cursor-pointer"
+                  className="flex items-center space-x-2"
+                  appearance="error"
                 >
                   <span className="text-2xl">
                     <RiDeleteBin7Line />
                   </span>
                   <span>Remove</span>
-                </button>
+                </Button>
               </div>
 
               <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-200/20 rounded-2xl pointer-events-none"></div>

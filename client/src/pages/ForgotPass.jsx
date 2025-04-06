@@ -3,6 +3,7 @@ import PageHeader from "../ui-components/PageHeader";
 import { FaExclamationCircle, FaEnvelope, FaArrowLeft } from "react-icons/fa";
 import { useNavigate, NavLink } from "react-router-dom";
 import Container from "../ui-components/Container";
+import Button from "../ui-components/Button";
 
 const ForgotPass = () => {
   const [email, setEmail] = useState("");
@@ -51,12 +52,9 @@ const ForgotPass = () => {
               <FaExclamationCircle /> {emailError}
             </p>
           )}
-          <button
-            className="focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 outline-0 ring-offset-white w-full mt-6 bg-brand-500 text-white p-3 rounded-lg font-semibold hover:bg-brand-600 transition cursor-pointer"
-            type="submit"
-          >
+          <Button type="submit" size="large" className="w-full mt-6">
             Get OTP
-          </button>
+          </Button>
         </form>
 
         <div className="text-center text-sm mt-4 text-gray-500">
