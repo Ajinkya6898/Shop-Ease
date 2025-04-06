@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import Alert from "../ui-components/Alert";
 import { useDispatch, useSelector } from "react-redux";
 import { MESSAGES } from "../constant";
@@ -53,48 +54,50 @@ const Wishlist = () => {
           <Alert type="info" message={MESSAGES.WISHLIST_EMPTY} />
         </div>
       ) : (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
+        <div className="mt-8 space-y-6">
           {wishlistProducts.map((item) => (
-            <div
+            <motion.div
               key={item.id}
-              className="relative bg-white/80 backdrop-blur-md shadow-xl rounded-2xl p-6 flex flex-col items-center text-center transition transform hover:scale-105 hover:shadow-2xl"
+              className="flex items-center justify-between gap-4 bg-white shadow-md rounded-xl p-4 hover:shadow-xl transition-all"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              layout
             >
-              <img
-                src={item.image}
-                alt={item.name}
-                className="w-36 h-36 object-cover rounded-xl shadow-md"
-              />
-              <h3 className="text-xl font-semibold text-gray-900 mt-4">
-                {item.title}
-              </h3>
-              <p className="text-brand-600 font-bold text-lg mt-2">
-                ₹ {item.price}
-              </p>
+              <div className="flex items-center gap-4">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-20 h-20 rounded-lg object-cover"
+                />
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-800">
+                    {item.title}
+                  </h3>
+                  <p className="text-brand-600 font-bold mt-1">
+                    ₹ {item.price}
+                  </p>
+                </div>
+              </div>
 
-              <div className="flex mt-5 space-x-3">
+              <div className="flex flex-col gap-2 min-w-fit">
                 <Button
                   onClick={() => addToCart(item)}
-                  className="flex items-center space-x-2"
+                  className="flex items-center gap-1 text-sm"
                 >
-                  <span className="text-2xl">
-                    <HiOutlineShoppingCart />
-                  </span>
-                  <span>Move to Cart</span>
+                  <HiOutlineShoppingCart />
+                  Move to Cart
                 </Button>
                 <Button
                   onClick={() => removeItem(item)}
-                  className="flex items-center space-x-2"
+                  className="flex items-center gap-2 text-sm"
                   appearance="error"
+                  variant="outlined"
                 >
-                  <span className="text-2xl">
-                    <RiDeleteBin7Line />
-                  </span>
-                  <span>Remove</span>
+                  <RiDeleteBin7Line />
+                  Remove
                 </Button>
               </div>
-
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-200/20 rounded-2xl pointer-events-none"></div>
-            </div>
+            </motion.div>
           ))}
         </div>
       )}

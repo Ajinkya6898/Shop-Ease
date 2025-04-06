@@ -27,7 +27,7 @@ const Header = () => {
   }
 
   return (
-    <header className="bg-white shadow-md">
+    <header className="bg-white/80 backdrop-blur-md shadow-md border-b-2 border-gray-200 sticky top-0 z-50">
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
         <NavLink to="/" className="text-2xl font-bold text-brand-600">
           ShopEase

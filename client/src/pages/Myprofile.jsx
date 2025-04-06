@@ -188,7 +188,7 @@ const MyProfile = () => {
           </section>
         </form>
       </Container>
-      <Container maxWidth="max-w-5xl" className="mt-6">
+      <Container maxWidth="max-w-5xl" className="mt-6" hasPageActionBar={true}>
         <div className="flex justify-end gap-4 px-2">
           <Button
             type="button"
