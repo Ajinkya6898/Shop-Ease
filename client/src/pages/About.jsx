@@ -2,6 +2,7 @@ import React from "react";
 import PageHeader from "../ui-components/PageHeader";
 import Container from "../ui-components/Container";
 import { HiOutlineCheckCircle } from "react-icons/hi2";
+import Button from "../ui-components/Button";
 
 const About = () => {
   return (
@@ -87,9 +88,7 @@ const About = () => {
         <p className="mt-3 text-gray-700">
           Stay updated with the latest trends, deals, and exclusive discounts.
         </p>
-        <button className="mt-4 bg-brand-500 text-white px-6 py-2 rounded-lg hover:bg-brand-600 transition">
-          Subscribe Now
-        </button>
+        <Button className="mt-4">Subscribe Now</Button>
       </div>
 
       <div className="text-center mt-6">

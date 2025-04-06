@@ -1,6 +1,7 @@
 import React from "react";
 import PageHeader from "../ui-components/PageHeader";
 import Container from "../ui-components/Container";
+import Button from "../ui-components/Button";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { LuPhoneCall } from "react-icons/lu";
 import { SlLocationPin } from "react-icons/sl";
@@ -70,9 +71,7 @@ const Contact = () => {
           placeholder="Your Message"
           className="input-container"
         ></textarea>
-        <button className="w-full bg-brand-500 text-white p-3 rounded-md font-semibold hover:bg-brand-600">
-          Submit
-        </button>
+        <Button className="w-full">Submit</Button>
       </form>
     </Container>
   );

@@ -3,6 +3,7 @@ import PageHeader from "../ui-components/PageHeader";
 import { FaEnvelopeOpenText, FaRedoAlt } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import Container from "../ui-components/Container";
+import Button from "../ui-components/Button";
 
 const VerifyOTP = ({ optLength = 6 }) => {
   return (
@@ -31,13 +32,9 @@ const VerifyOTP = ({ optLength = 6 }) => {
             />
           ))}
         </div>
-
-        <button
-          className="w-full mt-6 bg-brand-500 text-white p-3 rounded-lg font-semibold hover:bg-brand-600 transition cursor-pointer focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 outline-0 ring-offset-white"
-          type="submit"
-        >
+        <Button type="submit" className="mt-6">
           Submit OTP
-        </button>
+        </Button>
 
         <div className="flex justify-between items-center mt-4 text-sm text-gray-600">
           <p>Didn’t receive the code?</p>
