@@ -1,70 +1,71 @@
-import React, { useState } from "react";
+import React from "react";
 import PageHeader from "../ui-components/PageHeader";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../slices/userSlice";
 import Container from "../ui-components/Container";
 import Button from "../ui-components/Button";
+import { useForm } from "react-hook-form";
+import FormRow from "../ui-components/FormRow";
 
 const Login = () => {
-  const [userData, setUserData] = useState({
-    userName: "",
-    password: "",
-  });
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  function handleInputChange(event) {
-    const { name, value } = event.target;
-    setUserData({
-      ...userData,
-      [name]: value,
-    });
-  }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting, isValid },
+  } = useForm();
 
-  function handleLogin(event) {
-    event.preventDefault();
-    if (userData) {
-      dispatch(login(userData));
-      navigate("/");
-    }
-  }
+  const onSubmit = (data) => {
+    dispatch(login(data));
+    navigate("/");
+  };
 
   return (
     <Container maxWidth="max-w-lg" className="parent-container">
       <PageHeader pageHeading="Login" />
 
-      <form className="space-y-4" onSubmit={handleLogin}>
-        <div>
-          <label className="block text-gray-700 font-medium mb-2">Email</label>
+      <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+        <FormRow label="Email" error={errors.userName?.message}>
           <input
-            value={userData.userName}
-            name="userName"
-            onChange={handleInputChange}
+            {...register("userName", {
+              required: "Email is required",
+              pattern: {
+                value: /^\S+@\S+\.\S+$/,
+                message: "Enter a valid email address",
+              },
+            })}
             type="email"
             autoComplete="off"
             placeholder="Enter your email"
             className="input-container"
           />
-        </div>
+        </FormRow>
 
-        <div>
-          <label className="block text-gray-700 font-medium mb-2">
-            Password
-          </label>
+        <FormRow label="Password" error={errors.password?.message}>
           <input
-            value={userData.password}
-            name="password"
-            onChange={handleInputChange}
+            {...register("password", {
+              required: "Password is required",
+              minLength: {
+                value: 8,
+                message: "Password must be at least 8 characters",
+              },
+            })}
             type="password"
             placeholder="Enter your password"
             className="input-container"
           />
-        </div>
+        </FormRow>
 
-        <Button type="submit" size="large" className="w-full">
-          Sign In
+        <Button
+          type="submit"
+          size="large"
+          className="w-full"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "Signing in..." : "Sign In"}
         </Button>
       </form>
 

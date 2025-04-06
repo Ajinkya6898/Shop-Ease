@@ -7,7 +7,7 @@ const FormRow = ({ label, children, error }) => {
       <label className="block text-gray-700 font-medium mb-2">{label}</label>
       {children}
       {error && (
-        <p className="mt-1 text-sm text-red-600 flex items-center gap-1 animate-fadeIn">
+        <p className="mt-4 text-base text-red-600 flex items-center gap-3 animate-fadeIn">
           <FaExclamationCircle /> {error}
         </p>
       )}

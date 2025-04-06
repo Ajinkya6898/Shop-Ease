@@ -1,7 +1,7 @@
 import React from "react";
 
 const baseClasses =
-  "rounded-lg font-semibold transition cursor-pointer focus:ring-2 focus:ring-offset-2 outline-0";
+  "rounded-lg font-semibold transition cursor-pointer focus:ring-2 focus:ring-offset-2 outline-0 disabled:opacity-50 disabled:cursor-not-allowed";
 
 const sizeClasses = {
   small: "px-3 py-1 text-sm",
@@ -43,6 +43,7 @@ const Button = ({
   appearance = "primary",
   className = "",
   type = "button",
+  disabled = false,
   ...props
 }) => {
   const sizeClass = sizeClasses[size] || sizeClasses.medium;
@@ -53,7 +54,7 @@ const Button = ({
   const finalClass = `${baseClasses} ${sizeClass} ${appearanceClass} ${className}`;
 
   return (
-    <button className={finalClass} type={type} {...props}>
+    <button className={finalClass} type={type} disabled={disabled} {...props}>
       {children}
     </button>
   );
