@@ -16,6 +16,7 @@ import Payment from "./pages/Payment";
 import ForgotPass from "./pages/ForgotPass";
 import VerifyOTP from "./pages/VerifyOTP";
 import ResetPassword from "./pages/ResetPassword";
+import ProductDetails from "./pages/ProductDetails";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Dashboard /> },
       { path: "/products", element: <Products />, loader: productsLoader },
+      { path: "/products/:id", element: <ProductDetails /> },
       {
         path: "/orders",
         element: (
