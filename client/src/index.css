@@ -86,3 +86,11 @@ body {
   --border-radius-md: 7px;
   --border-radius-lg: 9px;
 }
+
+.parent-container {
+  @apply bg-gradient-to-br to-brand-100 min-h-screen flex items-center justify-center;
+}
+
+.input-container {
+  @apply w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-300 focus:outline-none;
+}

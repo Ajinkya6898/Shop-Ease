@@ -116,7 +116,7 @@ const MyProfile = () => {
                   value={form.currentPassword}
                   onChange={handleChange}
                   placeholder="Enter current password"
-                  className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-300 focus:outline-none"
+                  className="input-container"
                 />
               </div>
 
@@ -130,7 +130,7 @@ const MyProfile = () => {
                   value={form.newPassword}
                   onChange={handleChange}
                   placeholder="Enter new password"
-                  className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-300 focus:outline-none"
+                  className="input-container"
                 />
               </div>
 
@@ -144,7 +144,7 @@ const MyProfile = () => {
                   value={form.confirmPassword}
                   onChange={handleChange}
                   placeholder="Re-enter new password"
-                  className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-300 focus:outline-none"
+                  className="input-container"
                 />
               </div>
             </div>
@@ -166,7 +166,7 @@ const MyProfile = () => {
                   value={form.currentEmail}
                   onChange={handleChange}
                   placeholder="Enter current email"
-                  className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-300 focus:outline-none"
+                  className="input-container"
                 />
               </div>
 
@@ -180,7 +180,7 @@ const MyProfile = () => {
                   value={form.newEmail}
                   onChange={handleChange}
                   placeholder="Enter new email"
-                  className="w-full mt-1 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-300 focus:outline-none"
+                  className="input-container"
                 />
               </div>
             </div>

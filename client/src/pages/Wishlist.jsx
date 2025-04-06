@@ -8,6 +8,7 @@ import { RiDeleteBin7Line } from "react-icons/ri";
 import { HiOutlineShoppingCart } from "react-icons/hi2";
 import { moveToCart, removeFromWishlist } from "../slices/productSlice";
 import { useModal } from "../ui-components/ModalProvider";
+import Container from "../ui-components/Container";
 
 const Wishlist = () => {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ const Wishlist = () => {
   }
 
   return (
-    <>
+    <Container maxWidth="max-w-9xl">
       <PageHeader pageHeading="Your Wishlist" />
 
       {wishlistProducts.length === 0 ? (
@@ -95,7 +96,7 @@ const Wishlist = () => {
           ))}
         </div>
       )}
-    </>
+    </Container>
   );
 };
 

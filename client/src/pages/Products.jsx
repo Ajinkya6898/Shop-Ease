@@ -2,12 +2,13 @@ import React from "react";
 import { useLoaderData } from "react-router-dom";
 import PageHeader from "../ui-components/PageHeader";
 import ProductCard from "../ui-components/Card";
+import Container from "../ui-components/Container";
 
 const Products = () => {
   const products = useLoaderData();
 
   return (
-    <div className="max-w-7xl mx-auto bg-white shadow-xl rounded-2xl p-8 space-y-8 text-gray-800">
+    <Container maxWidth="max-w-9xl">
       <PageHeader pageHeading="Products" />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
         {products.map((product, index) => (
@@ -16,7 +17,7 @@ const Products = () => {
           </div>
         ))}
       </div>
-    </div>
+    </Container>
   );
 };
 
