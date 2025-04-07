@@ -15,7 +15,7 @@ import Signup from "../pages/Signup";
 import ForgotPass from "../pages/ForgotPass";
 import VerifyOTP from "../pages/VerifyOTP";
 import ResetPassword from "../pages/ResetPassword";
-import MyProfile from "../pages/MyProfile";
+import MyProfile from "../pages/Myprofile";
 
 const Router = createBrowserRouter([
   {
