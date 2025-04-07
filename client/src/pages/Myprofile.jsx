@@ -5,8 +5,8 @@ import Button from "../ui-components/Button";
 import PageActionContainer from "../ui-components/PageActionContainer";
 import UpdatePasswordSection from "../sections/UpdatePasswordSection";
 import UpdateEmailSection from "../sections/UpdateEmailSection";
-import { scrollTo } from "../utils";
 import UpdateMobileSection from "../sections/UpdateMobileSection";
+import { scrollTo } from "../utils";
 
 const MyProfile = () => {
   const [form, setForm] = useState({

@@ -17,7 +17,7 @@ import VerifyOTP from "../pages/VerifyOTP";
 import ResetPassword from "../pages/ResetPassword";
 import MyProfile from "../pages/MyProfile";
 
-const router = createBrowserRouter([
+const Router = createBrowserRouter([
   {
     path: "/",
     element: <AppLayout />,
@@ -86,4 +86,4 @@ const router = createBrowserRouter([
   { path: "/forgot-password/reset", element: <ResetPassword /> },
 ]);
 
-export default router;
+export default Router;
