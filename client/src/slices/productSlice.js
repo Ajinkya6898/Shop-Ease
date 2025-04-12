@@ -67,11 +67,16 @@ const productSlice = createSlice({
         );
       }
     },
-
     removeFromWishlist(state, action) {
       state.wishListProducts = state.wishListProducts.filter((pro) => {
         return pro.id !== action.payload;
       });
+    },
+    clearWishList(state) {
+      state.wishListProducts = [];
+    },
+    clearCart(state) {
+      state.cartProducts = [];
     },
   },
 });
@@ -84,6 +89,8 @@ export const {
   decreaseProductQty,
   moveToCart,
   removeFromWishlist,
+  clearWishList,
+  clearCart,
 } = productSlice.actions;
 
 export default productSlice.reducer;

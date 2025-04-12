@@ -32,7 +32,7 @@ const VerifyOTP = ({ optLength = 6 }) => {
             />
           ))}
         </div>
-        <Button type="submit" className="mt-6">
+        <Button type="submit" size="large" className="mt-6 w-full">
           Submit OTP
         </Button>
 

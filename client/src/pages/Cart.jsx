@@ -10,12 +10,14 @@ import Container from "../ui-components/Container";
 import { MdOutlineRemoveShoppingCart } from "react-icons/md";
 import { AiOutlineDelete } from "react-icons/ai";
 import {
+  clearCart,
   decreaseProductQty,
   increaseProductQty,
   removeFromCart,
 } from "../slices/productSlice";
 import { useModal } from "../ui-components/ModalProvider";
 import PageActionContainer from "../ui-components/PageActionContainer";
+import Button from "../ui-components/Button";
 
 const Cart = () => {
   const cartProducts = useSelector((state) => state.product.cartProducts);
@@ -38,10 +40,31 @@ const Cart = () => {
     });
   }
 
+  function emptyCart() {
+    modalDispatch({
+      type: "warning",
+      message: MESSAGES.CLEAR_CART,
+      onConfirm: () => {
+        dispatch(clearCart());
+      },
+    });
+  }
+
   return (
     <>
       <Container maxWidth="max-w-9xl" hasPageActionBar={true}>
-        <PageActionContainer pageHeading="Your Cart" />
+        <PageActionContainer
+          pageHeading="Your Cart"
+          rightContent={
+            <>
+              {cartProducts.length > 0 && (
+                <Button appearance="error" size="small" onClick={emptyCart}>
+                  Clear Cart
+                </Button>
+              )}
+            </>
+          }
+        />
       </Container>
       <Container maxWidth="max-w-9xl">
         {cartProducts.length === 0 ? (

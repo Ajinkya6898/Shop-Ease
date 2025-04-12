@@ -9,6 +9,9 @@ const MESSAGES = {
   CART_ITEM_REMOVED: "Item removed from your cart.",
   WISHLIST_ITEM_REMOVED: "Item removed from your wishlist.",
   EMPTY_ORDERS: "You haven't placed any order yet!!!",
+  CLEAR_WISHLIST:
+    "Are you sure you want to remove everything from your wishlist?",
+  CLEAR_CART: "Are you sure you want to remove everything from your cart?",
 };
 
 const PASSWORD_DOS = [
