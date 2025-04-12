@@ -1,12 +1,13 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login } from "../slices/userSlice";
 import { useForm } from "react-hook-form";
+import { login } from "../slices/userSlice";
 import PageHeader from "../ui-components/PageHeader";
 import Container from "../ui-components/Container";
 import Button from "../ui-components/Button";
 import FormRow from "../ui-components/FormRow";
+import Spinner from "../ui-components/Spinner";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -65,7 +66,13 @@ const Login = () => {
           className="w-full"
           disabled={isSubmitting}
         >
-          {isSubmitting ? "Signing in..." : "Sign In"}
+          {isSubmitting ? (
+            <div className="flex items-center justify-center gap-2">
+              <Spinner /> Logging in...
+            </div>
+          ) : (
+            "Login"
+          )}
         </Button>
       </form>
 

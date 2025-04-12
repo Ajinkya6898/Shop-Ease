@@ -1,10 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
+import { useForm } from "react-hook-form";
 import Container from "../ui-components/Container";
 import Button from "../ui-components/Button";
+import FormRow from "../ui-components/FormRow";
+import Spinner from "../ui-components/Spinner";
 
 const ResetPassword = () => {
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors, isSubmitting },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    console.log("Resetting password with:", data);
+    // Handle password reset logic here
+  };
 
   return (
     <Container maxWidth="max-w-xl" className="parent-container">
@@ -14,37 +26,49 @@ const ResetPassword = () => {
           Set your new password below
         </p>
 
-        <div className="space-y-5">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              New Password
-            </label>
+        <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
+          <FormRow label="New Password" error={errors.password?.message}>
             <input
               type="password"
-              className="input-container"
               placeholder="Enter new password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="new-password"
+              className="input-container"
+              {...register("password", {
+                required: "Password is required",
+                minLength: {
+                  value: 8,
+                  message: "Password must be at least 8 characters",
+                },
+              })}
             />
-          </div>
+          </FormRow>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Confirm Password
-            </label>
+          <FormRow
+            label="Confirm Password"
+            error={errors.confirmPassword?.message}
+          >
             <input
               type="password"
-              className="input-container"
               placeholder="Re-enter new password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              autoComplete="new-password"
+              className="input-container"
+              {...register("confirmPassword", {
+                required: "Please confirm your password",
+                validate: (value) =>
+                  value === watch("password") || "Passwords do not match",
+              })}
             />
-          </div>
-        </div>
+          </FormRow>
 
-        <Button className="w-full mt-3" type="submit" size="large">
-          Reset Password
-        </Button>
+          <Button
+            className="w-full mt-3"
+            type="submit"
+            size="large"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? <Spinner /> : "Reset Password"}
+          </Button>
+        </form>
       </div>
     </Container>
   );

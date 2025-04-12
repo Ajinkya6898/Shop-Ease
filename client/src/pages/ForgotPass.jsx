@@ -1,24 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import PageHeader from "../ui-components/PageHeader";
-import { FaExclamationCircle, FaEnvelope, FaArrowLeft } from "react-icons/fa";
+import { FaEnvelope, FaArrowLeft } from "react-icons/fa";
 import { useNavigate, NavLink } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import Container from "../ui-components/Container";
 import Button from "../ui-components/Button";
+import FormRow from "../ui-components/FormRow";
+import Spinner from "../ui-components/Spinner";
 
 const ForgotPass = () => {
-  const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm();
+
   const navigate = useNavigate();
 
   function handleForgotSubmit(event) {
-    event.preventDefault();
-    const emailValidate = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    const isEmailValid = emailValidate.test(email);
-    if (!isEmailValid) {
-      setEmailError("Please enter a valid email ID.");
-    } else {
-      navigate("/forgot-password/verify-otp");
-    }
+    navigate("/forgot-password/reset");
   }
 
   return (
@@ -34,30 +34,33 @@ const ForgotPass = () => {
           </p>
         </div>
 
-        <form onSubmit={handleForgotSubmit}>
-          <label className="block text-gray-700 font-light text-2xl mb-2 mt-6">
-            Email Address
-          </label>
-          <input
-            value={email}
-            name="userName"
-            onChange={(event) => setEmail(event.target.value)}
-            type="email"
-            autoComplete="off"
-            placeholder="Enter your email"
-            className="input-container"
-          />
-          {emailError && (
-            <p className="mt-3 text-lg text-red-600 flex items-center gap-2 animate-fadeIn">
-              <FaExclamationCircle /> {emailError}
-            </p>
-          )}
-          <Button type="submit" size="large" className="w-full mt-6">
-            Get OTP
+        <form onSubmit={handleSubmit(handleForgotSubmit)}>
+          <FormRow label="Email Address" error={errors.email?.message}>
+            <input
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^\S+@\S+\.\S+$/,
+                  message: "Enter a valid email address",
+                },
+              })}
+              type="email"
+              autoComplete="off"
+              placeholder="Enter your email"
+              className="input-container"
+            />
+          </FormRow>
+          <Button
+            type="submit"
+            size="large"
+            className="w-full mt-6"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? <Spinner /> : "Get OTP"}
           </Button>
         </form>
 
-        <div className="text-center text-sm mt-4 text-gray-500">
+        <div className="text-center text-sm text-gray-500">
           <NavLink
             to="/login"
             className="inline-flex items-center gap-2 text-brand-600 hover:underline"
