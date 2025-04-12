@@ -23,14 +23,14 @@ const ForgotPass = () => {
 
   return (
     <>
-      <Container maxWidth="max-w-xl" className="parent-container">
+      <Container maxWidth="max-w-lg" className="parent-container">
         <PageHeader pageHeading="Forgot Password" />
 
         <div className="text-center text-gray-600">
           <FaEnvelope className="mx-auto text-5xl text-brand-500 mb-4" />
           <p className="text-base">
             Enter the email address associated with your account and we’ll send
-            you a one-time password (OTP) to reset it.
+            you a one-time password (OTP).
           </p>
         </div>
 
