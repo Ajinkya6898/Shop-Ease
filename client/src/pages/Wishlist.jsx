@@ -3,11 +3,14 @@ import { motion } from "framer-motion";
 import Alert from "../ui-components/Alert";
 import { useDispatch, useSelector } from "react-redux";
 import { MESSAGES } from "../constant";
-import PageHeader from "../ui-components/PageHeader";
 import { FaHeartBroken } from "react-icons/fa";
 import { RiDeleteBin7Line } from "react-icons/ri";
 import { HiOutlineShoppingCart } from "react-icons/hi2";
-import { moveToCart, removeFromWishlist } from "../slices/productSlice";
+import {
+  clearWishList,
+  moveToCart,
+  removeFromWishlist,
+} from "../slices/productSlice";
 import { useModal } from "../ui-components/ModalProvider";
 import Container from "../ui-components/Container";
 import Button from "../ui-components/Button";
@@ -45,19 +48,33 @@ const Wishlist = () => {
     );
   }
 
+  function handleClearWishlist() {
+    modalDispatch({
+      type: "warning",
+      message: MESSAGES.CLEAR_WISHLIST,
+      onConfirm: () => {
+        dispatch(clearWishList());
+      },
+    });
+  }
+
   return (
     <>
       <Container maxWidth="max-w-9xl" hasPageActionBar={true}>
         <PageActionContainer
           pageHeading="Your Wishlist"
           rightContent={
-            <Button
-              appearance="error"
-              variant="outlined"
-              onClick={() => handleClearWishlist()}
-            >
-              Clear Wishlist
-            </Button>
+            <>
+              {wishlistProducts.length > 0 && (
+                <Button
+                  appearance="error"
+                  size="small"
+                  onClick={handleClearWishlist}
+                >
+                  Clear Wishlist
+                </Button>
+              )}
+            </>
           }
         />
       </Container>
@@ -103,7 +120,7 @@ const Wishlist = () => {
                   </Button>
                   <Button
                     onClick={() => removeItem(item)}
-                    className="flex items-center gap-2 text-sm"
+                    className="flex items-center justify-center gap-2 text-sm text-center"
                     appearance="error"
                     variant="outlined"
                   >
