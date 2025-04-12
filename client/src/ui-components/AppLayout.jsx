@@ -3,6 +3,7 @@ import { Outlet, useNavigation } from "react-router-dom";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import Loader from "./Loader";
+import Footer from "./Footer";
 
 const AppLayout = () => {
   const { state } = useNavigation();
@@ -16,7 +17,7 @@ const AppLayout = () => {
     <div className="h-screen flex flex-col">
       <Header toggleSidebar={toggleSidebar} />
 
-      <div className="lg:grid lg:grid-cols-[26rem_1fr] lg:grid-rows-[auto_1fr] flex-1 flex flex-col lg:flex-row">
+      <div className="lg:grid lg:grid-cols-[26rem_1fr] lg:grid-rows-[auto_1fr_auto] flex-1 flex flex-col lg:flex-row">
         <div
           className={`lg:block fixed inset-0 lg:static bg-black bg-opacity-50 transition-all lg:bg-transparent lg:opacity-100 lg:z-0 z-10 ${
             sidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"
@@ -33,6 +34,7 @@ const AppLayout = () => {
           <Outlet />
         </main>
       </div>
+      <Footer />
     </div>
   );
 };
